@@ -7,11 +7,13 @@ public class PalindroomMain {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Tik het te onderzoeken woord: ");
         String woord = scanner.next();
+
         PalindroomTester palin = new PalindroomTester(woord);
         System.out.println("Het originele woord is: " +
                 palin.getOrgTekst());
         System.out.println("Het omgekeerde woord is: " +
                 palin.getRevTekst());
+        
         if (palin.isPalindroom(false))
             System.out.println("Het woord is een zuiver palindroom.");
         else {

@@ -1,11 +1,32 @@
-package be.vdab;
+package be.vdab.voertuigen;
 
-public abstract class Voertuig {
+import be.vdab.util.Milieu;
+import be.vdab.util.Privaat;
+
+import java.util.Objects;
+
+public abstract class Voertuig implements Milieu, Privaat, Comparable<Voertuig> {
     private String polishouder = "onbepaald";
     private float kostprijs;
     private int pk;
     private float gemVerbruik;
     private String nummerplaat = "onbepaald";
+
+    @Override
+    public void geefMilieuData() {
+        System.out.println("--- Milieu data van voertuig ---");
+        System.out.println("PK :" + getPk());
+        System.out.println("Kostprijs :" + getKostprijs());
+        System.out.println("Gem. verbruik :" + getGemVerbruik());
+    }
+
+    @Override
+    public void geefPrivateData() {
+        System.out.println("--- Private data van voertuig ---");
+        System.out.println("Polishouder :" + getPolishouder());
+        System.out.println("Nummerplaat :" + getNummerplaat());
+    }
+
     public Voertuig() {
     }
     public Voertuig(String polishouder, float kostprijs,
@@ -64,4 +85,25 @@ public abstract class Voertuig {
         System.out.println("nummerplaat: " + nummerplaat);
     }
     public abstract double getKyotoScore();
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 43 * hash + Objects.hashCode(this.nummerplaat);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Voertuig)) {
+            return false;
+        }
+        Voertuig v = (Voertuig) obj;
+        return nummerplaat.equals(v.getNummerplaat() );
+    }
+
+    @Override
+    public int compareTo(Voertuig v) {
+        return nummerplaat.compareTo(v.getNummerplaat()) ;
+    }
 }

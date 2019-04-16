@@ -1,6 +1,9 @@
-package be.vdab;
+package be.vdab.voertuigen;
 
-public class Vrachtwagen extends Voertuig {
+import be.vdab.util.Vervuiler;
+import be.vdab.voertuigen.Voertuig;
+
+public class Vrachtwagen extends Voertuig implements Vervuiler {
     private float maxLading = 10000.0F;
     public Vrachtwagen() {
     }
@@ -30,5 +33,10 @@ public class Vrachtwagen extends Voertuig {
     public double getKyotoScore() {
         return (getGemVerbruik() * getPk() / (maxLading / 1000.0F) );
 //lading omzetten van kg naar ton
+    }
+
+    @Override
+    public double berekenVervuiling() {
+        return getKyotoScore() * 20;
     }
 }

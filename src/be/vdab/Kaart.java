@@ -3,10 +3,14 @@ package be.vdab;
 public class Kaart {
     private static String[] kleuren = {"harten", "ruiten", "klaveren",
             "schoppen" } ;
+
     private static String[] rangen = {"2", "3", "4", "5", "6", "7", "8",
             "9", "10", "boer", "vrouw", "heer", "aas" } ;
+
     //static --> gelijk voor alle objecten!!
+
     private int kleur, rang ;
+
     public Kaart() {
         kleur = (int) (Math.random() * 4 ); //index van de array's
         rang = (int) (Math.random() * 13 );

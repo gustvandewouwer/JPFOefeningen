@@ -1,6 +1,9 @@
-package be.vdab;
+package be.vdab.voertuigen;
 
-public class Personenwagen extends Voertuig {
+import be.vdab.util.Vervuiler;
+import be.vdab.voertuigen.Voertuig;
+
+public class Personenwagen extends Voertuig implements Vervuiler {
     private int aantalDeuren = 4;
     private int aantalPassagiers = 5;
 
@@ -50,5 +53,10 @@ public class Personenwagen extends Voertuig {
     @Override
     public double getKyotoScore() {
         return getGemVerbruik() * getPk() / aantalPassagiers;
+    }
+
+    @Override
+    public double berekenVervuiling() {
+        return getKyotoScore() * 5;
     }
 }

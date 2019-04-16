@@ -22,5 +22,7 @@ public class RekenaarMain {
         rek.setTekst(expressie);
         System.out.println("Totaal: " + rek.getTotaal());
         System.out.println(rek);
+
+
     }
 }

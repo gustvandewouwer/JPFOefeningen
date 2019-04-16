@@ -5,6 +5,7 @@ public class Waarnemer {
     private int minTemp;
     private int aantalWaarnemingen;
     private double somTemp;
+
     public Waarnemer() {
         maxTemp = Integer.MIN_VALUE;
         minTemp = Integer.MAX_VALUE;

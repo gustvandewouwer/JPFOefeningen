@@ -11,7 +11,7 @@ public class GetalMain {
         int absWaarde = getalA.absoluut(); // (e)
         System.out.println("absolute waarde van x = " + absWaarde);
         int som = getalA.som(7); // (f)
-        System.out.println("som van x en a " + som );
+        System.out.println("som van x en a " + som);
         getalA.add(56); // (g)
         getalA.print();
         float f = getalA.som(123.67F); // (h)

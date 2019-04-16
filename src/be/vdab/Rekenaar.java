@@ -3,23 +3,28 @@ package be.vdab;
 public class Rekenaar {
     private String tekst;
     private int totaal;
+
     public Rekenaar(String input) {
         tekst = input;
         totaal = berekenen(input);
     }
+
     public void setTekst(String input) {
         tekst = input;
         totaal = berekenen(input);
     }
+
     //Het is belangrijk dat de status van het object in zijn geheel blijft kloppen.
 //Wanneer de string-expressie wijzigt, wijzigt ook het resultaat van de berekening,
 //daarom wordt meteen na het setten van de string tekst het totaal berekend.
     public String getTekst() {
         return tekst;
     }
+
     public int getTotaal() {
         return totaal;
     }
+
     private int berekenen(String expressie) {
         String[] delen = expressie.split(" ");
 //in geval van een lege expressie bevat de array delen slechts 1 element,
@@ -41,6 +46,7 @@ public class Rekenaar {
         }
         return totaal;
     }
+
     private void voerUit(char bewTeken, int getal) {
         switch (bewTeken) {
             case '+':
@@ -57,6 +63,7 @@ public class Rekenaar {
                 break;
         }
     }
+
     @Override
     public String toString() {
         return tekst + ";" + totaal;

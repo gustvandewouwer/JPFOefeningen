@@ -1,5 +1,14 @@
 package be.vdab;
 
+import be.vdab.util.Vervuiler;
+import be.vdab.verwarming.Stookketel;
+import be.vdab.voertuigen.Personenwagen;
+import be.vdab.voertuigen.Voertuig;
+import be.vdab.voertuigen.Vrachtwagen;
+
+import java.util.Set;
+import java.util.TreeSet;
+
 public class VoertuigenMain {
     public static void main(String[] args) {
         Personenwagen opel1 = new Personenwagen();
@@ -38,6 +47,30 @@ public class VoertuigenMain {
         System.out.println("\n--- method toon() ---");
         for (Voertuig voertuig : voertuigen) {
             voertuig.toon();
+        }
+
+        System.out.println("\nVervuilers");
+        Vervuiler[] vervuilers = new Vervuiler[5];
+        vervuilers[0] = opel1;
+        vervuilers[1] = opel2;
+        vervuilers[2] = volvo1;
+        vervuilers[3] = volvo2;
+        vervuilers[4] = new Stookketel(10F);
+        for (Vervuiler vervuiler : vervuilers) {
+            System.out.println(vervuiler.berekenVervuiling());
+        }
+
+        Set<Voertuig> setVoertuigen = new TreeSet<>();
+        setVoertuigen.add(opel2);
+        setVoertuigen.add(new Personenwagen("Piet Peeters",
+                18321.0F, 110, 7.1F, "1-OPQ-099", 5, 5));
+        setVoertuigen.add(volvo2);
+        setVoertuigen.add(new Vrachtwagen("Jan Vos",
+                254612.0F, 450, 33.1F, "1-AZE-123", 6200.0F));
+        System.out.println("\n*** TreeSet van voertuigen ***");
+        for (Voertuig eenVoertuig : setVoertuigen) {
+            System.out.println(eenVoertuig);
+
         }
     }
 }

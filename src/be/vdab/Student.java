@@ -3,6 +3,7 @@ package be.vdab;
 public class Student {
     private String naam;
     private int score;
+
     public Student(String naam) {
         this.naam = naam;
     }
