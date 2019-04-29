@@ -1,5 +1,6 @@
 package be.vdab.model;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Formatter;
 import java.util.Objects;
@@ -97,6 +98,7 @@ public abstract class Product implements Comparable<Product> {
         }
 
     };
+
 
     public static Comparator<Product> sorteerOpVolume = new Comparator<Product>() {
 

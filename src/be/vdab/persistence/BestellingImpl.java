@@ -43,8 +43,11 @@ public class BestellingImpl implements Bestelling {
     @Override
     public void sorteerOpMerk() {
         Collections.sort(bestelling, Product.sorteerOpMerkNaam);
+//        Arrays.sort(bestelling, (product1, product2) -> product1.compare(product2));
         toonProducten();
     }
+
+
 
     @Override
     public void sorteerOpVolume() {

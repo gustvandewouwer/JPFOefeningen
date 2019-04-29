@@ -27,12 +27,14 @@ public class TestApp {
 
     }
 
-    private static void verwerkdata(boolean screen) throws FileNotFoundException {
+    private static void verwerkdata(boolean outputToFile) throws FileNotFoundException {
+        System.out.println("VERWERKING MET OUTPUT TO FILE: " + outputToFile);
+        System.out.println("==============================");
 
         // Store current System.out before assigning a new value
         PrintStream console = System.out;
 
-        if (!screen) {
+        if (outputToFile) {
             // Creating a File object that represents the disk file.
             PrintStream o = new PrintStream(new File("/data/merkproducten.dat"));
 
@@ -78,7 +80,7 @@ public class TestApp {
         System.out.printf("\nTotale prijs: €%.2f", bestelling.totalePrijs());
 //            CreateFile.writeToFile(((BestellingImpl) bestelling).getBestelling());
 
-        if (!screen) {
+        if (outputToFile) {
             // Use stored value for output stream
             System.setOut(console);
 //            System.out.println("This will be written on the console!");

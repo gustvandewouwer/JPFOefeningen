@@ -24,6 +24,8 @@ public class Catalogus {
                 BigDecimal.valueOf(3.15)));
         producten.add(new Product("zakje rozijnen",
                 BigDecimal.valueOf(1.90)));
+        producten.add(new Product(null,
+                BigDecimal.valueOf(2.90)));
     }
 
     public Set<Product> getProducten() {
