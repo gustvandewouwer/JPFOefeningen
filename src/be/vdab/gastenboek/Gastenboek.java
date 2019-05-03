@@ -12,6 +12,7 @@ public class Gastenboek implements Serializable {
     public void toevoegen(GastenboekEntry gastenboekEntry) {
         entries.add(gastenboekEntry);
     }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

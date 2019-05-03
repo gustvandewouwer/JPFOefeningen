@@ -7,16 +7,21 @@ public class Bediende extends Werknemer {
 
     private double maandwedde;
 
-    public Bediende(String naam, WerknemersDatum datumInDienst, double maandwedde) throws WerknemerException {
-        super(naam, datumInDienst);
+//    public Bediende(String naam, InDienstDatum inDienstDatum, double maandwedde) throws WerknemerException {
+    public Bediende(String naam, InDienstDatum inDienstDatum, double maandwedde) {
+        super(naam, inDienstDatum);
         setMaandwedde(maandwedde);
     }
 
-    public void setMaandwedde(double maandwedde) throws WerknemerException {
-        if (maandwedde == 0.0) {
-            this.maandwedde = DEFAULT_MAANDWEDDE;
-        } else {
+    public void setMaandwedde(double maandwedde) {
+        if (maandwedde > 0.0d) {
             this.maandwedde = maandwedde;
+        } else {
+            if (maandwedde == 0.0d) {
+                this.maandwedde = DEFAULT_MAANDWEDDE;
+            } else {
+                throw new IllegalArgumentException("ERROR: maandwedde mag niet negatief zijn");
+            }
         }
     }
 
@@ -31,6 +36,14 @@ public class Bediende extends Werknemer {
 
     @Override
     public String toString() {
-        return super.toString() + "\t" + getVerloning();
+        return super.toString() + ", " + maandwedde;
     }
+
+    public void toon() {
+        System.out.println("*** BEDIENDE");
+        super.toon();
+        System.out.println("\tmaandwedde: " + maandwedde);
+    }
+
+
 }

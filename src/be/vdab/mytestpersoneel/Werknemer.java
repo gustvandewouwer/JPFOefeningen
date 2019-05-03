@@ -10,11 +10,12 @@ public abstract class Werknemer implements Serializable, Comparable<Werknemer> {
 
     private int personeelsnummer;
     private String naam;
-    private WerknemersDatum datumInDienst;
+    private InDienstDatum inDienstDatum;
 
-    public Werknemer(String naam, WerknemersDatum datumInDienst) throws WerknemerException {
+//    public Werknemer(String naam, InDienstDatum inDienstDatum) throws WerknemerException {
+    public Werknemer(String naam, InDienstDatum inDienstDatum)  {
         setNaam(naam);
-        setDatumInDienst(datumInDienst);
+        setInDienstDatum(inDienstDatum);
         setPersoneelsnummer();
     }
 
@@ -26,24 +27,31 @@ public abstract class Werknemer implements Serializable, Comparable<Werknemer> {
         this.personeelsnummer = ++HOOGSTE_PERSONEELSNUMMER;
     }
 
-    public WerknemersDatum getDatumInDienst() {
-        return datumInDienst;
+    public InDienstDatum getInDienstDatum() {
+        return inDienstDatum;
     }
 
-    public void setDatumInDienst(WerknemersDatum datumInDienst) {
-        this.datumInDienst = datumInDienst;
+    public void setInDienstDatum(InDienstDatum inDienstDatum) {
+        if (inDienstDatum == null) {
+            throw new IllegalArgumentException("ERROR: Indienstdatum is verplicht");
+        }
+        this.inDienstDatum = inDienstDatum;
     }
 
     public String getNaam() {
         return naam;
     }
 
-    public void setNaam(String naam) throws WerknemerException {
+//    public void setNaam(String naam) throws WerknemerException {
+    public void setNaam(String naam)  {
         if ((naam == null) || naam.trim().isEmpty()) {
-            throw new WerknemerException("Naam werknemer verplicht in te vullen");
+//            throw new WerknemerException("ERROR: Naam werknemer verplicht in te vullen");
+            throw new IllegalArgumentException("ERROR: Naam werknemer verplicht");
         }
         this.naam = naam;
     }
+
+    public abstract double getVerloning();
 
     @Override
     public boolean equals(Object o) {
@@ -60,10 +68,15 @@ public abstract class Werknemer implements Serializable, Comparable<Werknemer> {
 
     @Override
     public String toString() {
-        return personeelsnummer + ", " + datumInDienst + ", " + naam;
+        return personeelsnummer + ", " + inDienstDatum + ", " + naam;
     }
 
-    public abstract double getVerloning();
+    public void toon() {
+        System.out.println("\tpersoneelsnummer: " + personeelsnummer);
+        System.out.println("\tnaam: " + naam);
+        System.out.println("\tverloning: " + getVerloning());
+        inDienstDatum.toon();
+    }
 
     @Override
     public int compareTo(Werknemer o) {

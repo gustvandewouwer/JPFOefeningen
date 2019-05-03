@@ -1,6 +1,15 @@
 package be.vdab.mytestpersoneel;
 
-public class Datum {
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
+import java.util.stream.IntStream;
+
+public class Datum implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private static final int[] MAANDEN_MET_30_DAGEN = new int[]{4, 6, 9, 11};
+
     private int dag;
     private int maand;
     private int jaar;
@@ -12,6 +21,10 @@ public class Datum {
     }
 
     public Datum() {
+        LocalDate nu = LocalDate.now();
+        dag = nu.getDayOfMonth();
+        maand = nu.getMonthValue();
+        jaar = nu.getYear();
     }
 
     public int getDag() {
@@ -19,18 +32,25 @@ public class Datum {
     }
 
     public void setDag(int dag) throws DatumException {
-        if (dag < 0 || dag > 31) {
-            throw new DatumException("Foutieve dag (dag=" + dag + " maand=" + maand + " jaar=" + jaar + ")");
+        if (dag < 1 || dag > 31) {
+            throw new DatumException("ERROR: Foutieve dag (dag=" + dag + ")");
         }
-        if ((maand == 4 || maand == 6 || maand == 9 || maand == 11) && (dag > 30)) {
-            throw new DatumException("Slechts 30 dagen in deze maand (dag=" + dag + " maand=" + maand + " jaar=" + jaar + ")");
+
+        if (IntStream.of(MAANDEN_MET_30_DAGEN).anyMatch(x -> x == getMaand()) && (dag > 30)) {
+            throw new DatumException("ERROR: Maximaal 30 dagen in deze maand (dag=" + dag + " maand=" + maand + ")");
         }
+
+//        if ((maand == 4 || maand == 6 || maand == 9 || maand == 11) && (dag > 30)) {
+//            throw new DatumException("Slechts 30 dagen in deze maand (dag=" + dag + " maand=" + maand + " jaar=" + jaar + ")");
+//        }
+
         if (maand == 2) {
             if (dag > 29) {
-                throw new DatumException("Maximaal 29 dagen in februari (dag=" + dag + " maand=" + maand + " jaar=" + jaar + ")");
-            }
-            if ((dag == 29) && (!isSchrikkeljaar())) {
-                throw new DatumException("Maximaal 28 dagen in februari indien geen schrikkeljaar (dag=" + dag + " maand=" + maand + " jaar=" + jaar + ")");
+                throw new DatumException("ERROR: Maximaal 29 dagen in februari (dag=" + dag + " maand=" + maand + ")");
+            } else {
+                if ((dag == 29) && (!isSchrikkeljaar())) {
+                    throw new DatumException("ERROR: Maximaal 28 dagen in februari indien geen schrikkeljaar (dag=" + dag + " maand=" + maand + " jaar=" + jaar + ")");
+                }
             }
         }
 
@@ -42,8 +62,8 @@ public class Datum {
     }
 
     public void setMaand(int maand) throws DatumException {
-        if ((maand < 0) || (maand > 12)) {
-            throw new DatumException("Foutieve maand (1-12) (maand=" + maand + ")");
+        if ((maand < 1) || (maand > 12)) {
+            throw new DatumException("ERROR: Foutieve maand (1-12) (maand=" + maand + ")");
         }
         this.maand = maand;
     }
@@ -53,8 +73,8 @@ public class Datum {
     }
 
     public void setJaar(int jaar) throws DatumException {
-        if ((jaar <= 1584) || (jaar > 4099)) {
-            throw new DatumException("Foutief jaar (jaar=" + jaar + ")");
+        if ((jaar < 1584) || (jaar > 4099)) {
+            throw new DatumException("ERROR: Foutief jaar (jaar=" + jaar + ")");
         }
         this.jaar = jaar;
     }
@@ -75,5 +95,27 @@ public class Datum {
     @Override
     public String toString() {
         return dag + ", " + maand + ", " + jaar;
+    }
+
+    public void toon() {
+        System.out.println("\tdag: " + dag);
+        System.out.println("\tmaand: " + maand);
+        System.out.println("\tjaar: " + jaar);
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Datum datum = (Datum) o;
+        return dag == datum.dag &&
+                maand == datum.maand &&
+                jaar == datum.jaar;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dag, maand, jaar);
     }
 }

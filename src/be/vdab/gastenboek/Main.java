@@ -9,7 +9,8 @@ public class Main {
         Gastenboek gastenboek = manager.lees();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("T=tonen,S=schrijven,E=einde:");
+
+        System.out.print("T=tonen, S=schrijven, E=einde:");
 
         for (String keuze;
              !(keuze = scanner.nextLine()).equalsIgnoreCase("E"); ) {

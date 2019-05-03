@@ -7,8 +7,9 @@ public class Kaderlid extends Bediende {
 
     private String functietitel;
 
-    public Kaderlid(String naam, WerknemersDatum datumInDienst, double maandwedde, String functietitel) throws WerknemerException {
-        super(naam, datumInDienst, maandwedde);
+//    public Kaderlid(String naam, InDienstDatum inDienstDatum, double maandwedde, String functietitel) throws WerknemerException {
+    public Kaderlid(String naam, InDienstDatum inDienstDatum, double maandwedde, String functietitel) {
+        super(naam, inDienstDatum, maandwedde);
         setFunctietitel(functietitel);
     }
 
@@ -24,4 +25,14 @@ public class Kaderlid extends Bediende {
         return functietitel;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + ", " + functietitel;
+    }
+
+    public void toon() {
+        System.out.println("*** KADERLID");
+        super.toon();
+        System.out.println("\tfunctietitel: " + functietitel);
+    }
 }
