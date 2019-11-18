@@ -1,4 +1,4 @@
-package be.vdab;
+package be.vdab.bestandenendirectories;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,12 +10,12 @@ import java.nio.file.Paths;
 public class PuntMain {
     public static void main(String[] args) {
         // SCHRIJVEN VAN OBJECTEN IN EEN FILE
-//        try (ObjectOutputStream stream = new ObjectOutputStream(Files.newOutputStream(Paths.get("/data/punt.ser")))) {
-//            stream.writeObject(new Punt(10, 20));
-//
-//        } catch (IOException ex) {
-//            System.out.println(ex);
-//        }
+        try (ObjectOutputStream stream = new ObjectOutputStream(Files.newOutputStream(Paths.get("/data/punt.ser")))) {
+            stream.writeObject(new Punt(10, 20));
+
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
 
         // LEZEN VAN OBJECTEN UIT EEN FILE
         try (InputStream inputStream = Files.newInputStream(Paths.get("/data/punt.ser"));

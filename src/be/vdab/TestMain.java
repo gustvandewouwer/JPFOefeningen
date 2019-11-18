@@ -16,5 +16,14 @@ public class TestMain {
         } catch (RuntimeException ex) {
             System.out.println("RuntimeException: " + ex.getMessage());
         }
+
+        Integer i = new Integer(1);
+        verhoog(i);
+        System.out.println("i=" + i);
+    }
+
+    private static void verhoog(Integer i) {
+        i++;
+        System.out.println("i=" + i);
     }
 }

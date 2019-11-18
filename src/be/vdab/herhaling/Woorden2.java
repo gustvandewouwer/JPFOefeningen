@@ -10,7 +10,7 @@ public class Woorden2 {
         System.out.println("Geef zinnen in (stop om te eindigen)");
         String zin = scanner.nextLine();
         int zinVolgnr = 0;
-        while (!zin.equals("stop")) {
+        while (!zin.toLowerCase().equals("stop")) {
             zinVolgnr++;
             String[] arrWoorden = zin.split(" ");
             for (String woord : arrWoorden) {
@@ -28,7 +28,8 @@ public class Woorden2 {
             zin = scanner.nextLine();
         }
         for (Map.Entry<String, List<Integer>> entry : mapWoorden.entrySet()) {
-            System.out.println(entry.getKey() + "/" + entry.getValue());
+//            System.out.println(entry.getKey() + "/" + entry.getValue());
+            System.out.println(entry);
         }
 
     }

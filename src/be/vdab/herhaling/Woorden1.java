@@ -11,10 +11,9 @@ public class Woorden1 {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Geef zinnen in (stop om te eindigen)");
         String zin = scanner.nextLine();
-        while (!zin.equals("stop")) {
+        while (!zin.toLowerCase().equals("stop")) {
             String[] arrWoorden = zin.split(" ");
-            for (String woord :
-                    arrWoorden) {
+            for (String woord : arrWoorden) {
                 System.out.println(woord);
                 Integer aantal = mapWoorden.get(woord);
                 if (aantal == null) {

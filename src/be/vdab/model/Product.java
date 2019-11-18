@@ -1,6 +1,5 @@
 package be.vdab.model;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Formatter;
 import java.util.Objects;
@@ -83,7 +82,8 @@ public abstract class Product implements Comparable<Product> {
         return Objects.hash(productNummer);
     }
 
-    public static Comparator<Product> sorteerOpMerkNaam = new Comparator<Product>() {
+//    Methode voluit geschreven
+    public static Comparator<Product> sorteerOpMerkNaam1 = new Comparator<Product>() {
 
         public int compare(Product product1, Product product2) {
 
@@ -92,29 +92,37 @@ public abstract class Product implements Comparable<Product> {
 
             //ascending order
             return merknaam1.compareTo(merknaam2);
-
-            //descending order
-            //return fruitName2.compareTo(fruitName1);
         }
-
     };
 
+//    Methode met gebruik van lambda
+    public static Comparator<Product> sorteerOpMerkNaam2 = (product1, product2) -> {
 
-    public static Comparator<Product> sorteerOpVolume = new Comparator<Product>() {
+        String merknaam1 = product1.getMerk();
+        String merknaam2 = product2.getMerk();
 
-        public int compare(Product product1, Product product2) {
-
-            int volume1 = product1.getVolume();
-            int volume2 = product2.getVolume();
-
-            //ascending order
-            return volume1 - volume2;
-
-            //descending order
-            //return fruitName2.compareTo(fruitName1);
-        }
-
+        //ascending order
+        return merknaam1.compareTo(merknaam2);
     };
+
+//    Meest compacte methode
+    public static Comparator<Product> sorteerOpMerkNaam(){
+        return Comparator.comparing(Product::getMerk);
+    }
+
+    public static Comparator<Product> sorteerOpVolume1 = (product1, product2) -> {
+
+        int volume1 = product1.getVolume();
+        int volume2 = product2.getVolume();
+
+        //ascending order
+        return volume1 - volume2;
+    };
+
+//    Meest compacte methode
+    public static Comparator<Product> sorteerOpVolume(){
+        return Comparator.comparingInt(Product::getVolume);
+    }
 
     @Override
     public String toString() {

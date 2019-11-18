@@ -12,9 +12,14 @@ public class VBSet {
         hs.add("citroen");
         hs.add("boom");
         hs.add("aap");
+        hs.add(null);
+
         System.out.println("Voorbeeld van een HashSet:");
-        for (String woord : hs) {
-            System.out.println(woord + "\t" + woord.hashCode());
+        for (String h : hs) {
+            System.out.println(h);
         }
+//        for (String woord : hs) {
+//            System.out.println(woord + "\t" + woord.hashCode());
+//        }
     }
 }

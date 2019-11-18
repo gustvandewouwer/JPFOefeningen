@@ -4,6 +4,7 @@ import be.vdab.model.Parfum;
 import be.vdab.model.Product;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class BestellingImpl implements Bestelling {
     private List<Product> bestelling = new ArrayList<>();
@@ -28,63 +29,63 @@ public class BestellingImpl implements Bestelling {
 
     @Override
     public void sorteer() {
-       Collections.sort(bestelling);
-       toonProducten();
+        Collections.sort(bestelling);
+        toonProducten();
     }
 
     public void toonProducten() {
-        for (Product product :
-                bestelling) {
-            System.out.println(product.toString());
-
-        }
+        bestelling.stream().map(Product::toString).forEach(System.out::println);
     }
 
     @Override
     public void sorteerOpMerk() {
-        Collections.sort(bestelling, Product.sorteerOpMerkNaam);
-//        Arrays.sort(bestelling, (product1, product2) -> product1.compare(product2));
+//        Collections.sort(bestelling, Product.sorteerOpMerkNaam());
+        bestelling.sort(Product.sorteerOpMerkNaam());
         toonProducten();
     }
 
 
-
     @Override
     public void sorteerOpVolume() {
-        Collections.sort(bestelling, Product.sorteerOpVolume);
+        bestelling.sort(Product.sorteerOpVolume());
         toonProducten();
     }
 
     @Override
     public void toonPerMerk(String merk) {
-        for (Product product :
-                bestelling) {
-            if (product.getMerk().equals(merk)) {
-                System.out.println(product.toString());
-            }
-        }
+//        for (Product product :
+//                bestelling) {
+//            if (product.getMerk().equals(merk)) {
+//                System.out.println(product.toString());
+//            }
+//        }
 
+        bestelling.stream().filter(product -> product.getMerk().equals(merk)).map(Product::toString).forEach(System.out::println);
     }
 
     @Override
     public void toonGoedkopeProducten() {
-        for (Product product :
-                bestelling) {
-            if (product.getPrijs() < 50.0D) {
-                System.out.println(product.toString());
-            }
-        }
+//        for (Product product :
+//                bestelling) {
+//            if (product.getPrijs() < 50.0D) {
+//                System.out.println(product.toString());
+//            }
+//        }
 
+        bestelling.stream().filter(product -> product.getPrijs() < 50.0D).map(Product::toString).forEach(System.out::println);
     }
 
     @Override
     public void toonParfums() {
-        for (Product product :
-                bestelling) {
-            if (product instanceof Parfum) {
-                System.out.println(product.toString());
-            }
-        }
+//        for (Product product :
+//                bestelling) {
+//            if (product instanceof Parfum) {
+//                System.out.println(product.toString());
+//            }
+//        }
+
+//        bestelling.stream().filter(product -> product instanceof Parfum).map(Product::toString).forEach(System.out::println);
+        bestelling.stream().filter(product -> product instanceof Parfum).forEach(System.out::println);
     }
 
     @Override
@@ -101,11 +102,13 @@ public class BestellingImpl implements Bestelling {
 
     @Override
     public double totalePrijs() {
-        double totalePrijs = 0D;
-        for (Product product :
-                bestelling) {
-            totalePrijs += product.getPrijs();
-        }
+//        double totalePrijs = 0.0;
+//        for (Product product : bestelling) {
+//            double prijs = product.getPrijs();
+//            totalePrijs += prijs;
+//        }
+
+        double totalePrijs = bestelling.stream().mapToDouble(Product::getPrijs).sum();
         return totalePrijs;
     }
 }

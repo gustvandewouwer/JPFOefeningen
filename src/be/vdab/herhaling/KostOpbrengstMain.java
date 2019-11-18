@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class KostOpbrengstMain {
     public static void main(String[] args) {
-        ArrayList arrKosten = new ArrayList<Kost>();
+        ArrayList<Kost> arrKosten = new ArrayList<>();
         arrKosten.add(new Gebouw(new BigDecimal(600)));
         arrKosten.add(new Instructeur(new BigDecimal(2000), new BigDecimal(50), new BigDecimal(20)));
 

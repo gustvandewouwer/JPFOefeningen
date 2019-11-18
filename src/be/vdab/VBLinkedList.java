@@ -28,6 +28,10 @@ public class VBLinkedList {
             System.out.println(woord);
         }
 
+        for (String s : ll) {
+            System.out.println(s);
+        }
+
         System.out.println("\nExtra methods");
         LinkedList<String> llijst = (LinkedList) ll;
         System.out.println(llijst.getFirst());

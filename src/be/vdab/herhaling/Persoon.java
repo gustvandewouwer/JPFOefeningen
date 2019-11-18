@@ -61,16 +61,13 @@ public class Persoon implements Serializable, Comparable<Persoon> {
 
     @Override
     public int compareTo(Persoon persoon) {
-        // sorteren op cursusnr
-        //      return cursusNr - c.getCursusNr();
+        if (familienaam.compareTo(persoon.getFamilienaam()) < 0) return -1;
+        else if (familienaam.compareTo(persoon.getFamilienaam()) > 0) return 1;
+        else if (voornaam.compareTo(persoon.getVoornaam()) < 0) return -1;
+        else if (voornaam.compareTo(persoon.getVoornaam()) > 0) return 1;
+            return 0;
 
-//        if (familienaam.compareTo(persoon.getFamilienaam()) < 0) return -1;
-//        else if (familienaam.compareTo(persoon.getFamilienaam()) > 0) return 1;
-//        else if (voornaam.compareTo(persoon.getVoornaam()) < 0) return -1;
-//        else if (voornaam.compareTo(persoon.getVoornaam()) > 0) return 1;
-//            return 0;
-
-        return this.getFamilienaam().compareTo(persoon.getFamilienaam()) * 10
-                + this.getVoornaam().compareTo(persoon.getVoornaam());
+//        return this.getFamilienaam().compareTo(persoon.getFamilienaam()) * 10
+//                + this.getVoornaam().compareTo(persoon.getVoornaam());
     }
 }

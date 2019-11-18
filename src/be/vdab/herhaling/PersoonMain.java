@@ -20,6 +20,7 @@ public class PersoonMain {
         setPersonen.add(new Persoon("Jan", "Janssen"));
         setPersonen.add(new Persoon("Jan", "Merckx"));
         setPersonen.add(new Persoon("Jan", "Hovens"));
+        setPersonen.add(new Persoon("Jan", "Hovens"));
         setPersonen.add(new Persoon("Jan", "VDW"));
         setPersonen.add(new Persoon("Jan", "GWO"));
         setPersonen.add(new Persoon("Fred", "Janssen"));

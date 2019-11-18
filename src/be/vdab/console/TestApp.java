@@ -1,89 +1,41 @@
 package be.vdab.console;
 
-import be.vdab.model.Product;
-import be.vdab.persistence.Bestelling;
-import be.vdab.persistence.BestellingImpl;
-import be.vdab.persistence.Data;
-
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
-import java.util.List;
+import java.util.Scanner;
 
 public class TestApp {
     public static void main(String[] args) {
         System.out.println("BEGIN VERWERKING");
         System.out.println();
 
+        Scanner scanner = new Scanner((System.in));
+
+        String keuze = getKeuze(scanner);
+
         try {
-            verwerkdata(true);
-            verwerkdata(false);
+            MerkProductenHelper.verwerkdata(keuze.toUpperCase().equals("F"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         System.out.println();
         System.out.println("EINDE VERWERKING");
-
     }
 
-    private static void verwerkdata(boolean outputToFile) throws FileNotFoundException {
-        System.out.println("VERWERKING MET OUTPUT TO FILE: " + outputToFile);
-        System.out.println("==============================");
-
-        // Store current System.out before assigning a new value
-        PrintStream console = System.out;
-
-        if (outputToFile) {
-            // Creating a File object that represents the disk file.
-            PrintStream o = new PrintStream(new File("/data/merkproducten.dat"));
-
-            // Assign o to output stream
-            System.setOut(o);
-
-//            System.out.println("This will be written to the text file");
-
+    private static String getKeuze(Scanner scanner) {
+        System.out.println("Output naar file(F) of naar desktop(D)?");
+        String keuze = scanner.next();
+        while (!validKeuze(keuze)) {
+            keuze = getKeuze(scanner);
         }
-
-
-        Bestelling bestelling = null;
-        System.out.printf("Oplossing van %s %s\n", "GUST VAN DE WOUWER ", "FUNCTIE");
-
-        bestelling = new BestellingImpl();
-        List<Product> lijst = Data.getData();
-
-        for (Product artikel : lijst) {
-            bestelling.voegProductToe(artikel);
-        }
-
-        System.out.println("Lijst gesorteerd op natuurlijke volgorde: ");
-        bestelling.sorteer();
-
-        System.out.println("\nLijst gesorteerd op merknaam: ");
-        bestelling.sorteerOpMerk();
-
-        System.out.println("\nLijst gesorteerd op volume: ");
-        bestelling.sorteerOpVolume();
-
-        System.out.println("\nVan het merk Georgio Armani:");
-        bestelling.toonPerMerk("Georgio Armani");
-
-        System.out.println("\nAlle Parfums:");
-        bestelling.toonParfums();
-
-        System.out.println("\nAlle producten onder €50; ");
-        bestelling.toonGoedkopeProducten();
-
-        Product product = bestelling.zoekDuursteProduct();
-        System.out.println("\nDuurste product:\n" + product);
-
-        System.out.printf("\nTotale prijs: €%.2f", bestelling.totalePrijs());
-//            CreateFile.writeToFile(((BestellingImpl) bestelling).getBestelling());
-
-        if (outputToFile) {
-            // Use stored value for output stream
-            System.setOut(console);
-//            System.out.println("This will be written on the console!");
-        }
+        return keuze;
     }
+
+    private static boolean validKeuze(String keuze) {
+        if (keuze.toUpperCase().equals("F") || keuze.toUpperCase().equals("D")) {
+            return true;
+        }
+        return false;
+    }
+
 }

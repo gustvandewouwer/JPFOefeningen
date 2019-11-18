@@ -1,4 +1,4 @@
-package be.vdab;
+package be.vdab.bestandenendirectories;
 
 import java.io.Serializable;
 
